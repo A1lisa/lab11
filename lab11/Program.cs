@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
+using System.Globalization;
 using System.Runtime.Serialization.Formatters;
+using System.Security.Cryptography.X509Certificates;
 
 namespace lab11
 {
@@ -10,11 +12,23 @@ namespace lab11
         {
             Console.WriteLine("Введите шестизначное число");
             string a = Console.ReadLine();
-            if (a.Length != 6)
-            {
-                Console.WriteLine("число не шестизначное");
-                return;
-            }
+            string result=Logic.Compare(a);
+            Console.WriteLine(result);
+        }
+
+    }
+}
+public class Logic
+{
+    public static string Compare (string a)
+    {
+        string outMessage = "";
+        if (a.Length != 6)
+        {
+           outMessage=("число не шестизначное");
+        }
+        else
+        {
             int first = 0;
             int last = 0;
             for (int i = 0; i < 3; i++)
@@ -24,13 +38,12 @@ namespace lab11
             }
             if (first == last)
             {
-                Console.WriteLine("число счастливое");
+                outMessage=("число счастливое");
             }
-            else Console.WriteLine("число несчастливое");
+            else outMessage=("число несчастливое");
         }
-
+        return outMessage;
     }
 }
-
 
 
